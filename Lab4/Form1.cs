@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Windows.Forms;
+using System.Diagnostics;
 using static Lab4.Form1;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
@@ -15,6 +16,7 @@ namespace Lab4
 {
     public partial class Form1 : Form
     {
+        private Stopwatch stopwatch = new Stopwatch();
 
         MyQueue<Student> queue1 = new MyQueue<Student>();
         MyQueue<Student> queue2 = new MyQueue<Student>();
@@ -31,8 +33,11 @@ namespace Lab4
             students.Add(new Student("IC-33", "Шмигельський", ""));
             students.Add(new Student("IC-31", "Коваль", ""));
             students.Add(new Student("IC-32", "Михайлова", ""));
+            students.Add(new Student("IC-32", "Мельник", ""));
+            students.Add(new Student("IC-33", "Шевченко", ""));
+            students.Add(new Student("IC-31", "Мороз", ""));
 
-            
+
 
             // Відобразимо студентів у ListBox
             DisplayStudents();
@@ -138,22 +143,34 @@ namespace Lab4
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            if(!queue1.IsEmpty())
+            
+            if (!queue1.IsEmpty())
             {
+                stopwatch.Restart();
                 outlistBox1.Items.Add(queue1.Dequeue());
                 listBox1.Items.RemoveAt(0);
+                stopwatch.Stop();
+                outlistBox1.Items.Add($"Execution time: {stopwatch.Elapsed}");
 
             }
             else if (!queue2.IsEmpty())
             {
+                stopwatch.Restart();
                 outlistBox2.Items.Add(queue2.Dequeue());
                 listBox2.Items.RemoveAt(0);
+                stopwatch.Stop();
+                outlistBox2.Items.Add($"Execution time: {stopwatch.Elapsed}");
             }
             else if (!queue3.IsEmpty())
             {
+                stopwatch.Restart();
                 outlistBox3.Items.Add(queue3.Dequeue());
                 listBox3.Items.RemoveAt(0);
+                stopwatch.Stop();
+                outlistBox3.Items.Add($"Execution time: {stopwatch.Elapsed}");
             }
+            
+
         }
 
 
@@ -215,6 +232,7 @@ namespace Lab4
 
         private void button2_Click(object sender, EventArgs e)
         {
+
             outlistBox1.Items.Clear();
             outlistBox2.Items.Clear();
             outlistBox3.Items.Clear();

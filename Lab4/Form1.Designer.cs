@@ -83,7 +83,7 @@
             this.outlistBox1.ItemHeight = 16;
             this.outlistBox1.Location = new System.Drawing.Point(655, 36);
             this.outlistBox1.Name = "outlistBox1";
-            this.outlistBox1.Size = new System.Drawing.Size(202, 100);
+            this.outlistBox1.Size = new System.Drawing.Size(236, 100);
             this.outlistBox1.TabIndex = 3;
             // 
             // outlistBox2
@@ -92,7 +92,7 @@
             this.outlistBox2.ItemHeight = 16;
             this.outlistBox2.Location = new System.Drawing.Point(655, 173);
             this.outlistBox2.Name = "outlistBox2";
-            this.outlistBox2.Size = new System.Drawing.Size(202, 100);
+            this.outlistBox2.Size = new System.Drawing.Size(236, 100);
             this.outlistBox2.TabIndex = 4;
             // 
             // outlistBox3
@@ -101,7 +101,7 @@
             this.outlistBox3.ItemHeight = 16;
             this.outlistBox3.Location = new System.Drawing.Point(655, 315);
             this.outlistBox3.Name = "outlistBox3";
-            this.outlistBox3.Size = new System.Drawing.Size(202, 100);
+            this.outlistBox3.Size = new System.Drawing.Size(236, 100);
             this.outlistBox3.TabIndex = 5;
             // 
             // button1
@@ -224,7 +224,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(891, 517);
+            this.ClientSize = new System.Drawing.Size(940, 517);
             this.Controls.Add(this.SetMark);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.label7);
