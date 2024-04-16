@@ -22,6 +22,10 @@ namespace Lab4
         MyQueue<Student> queue2 = new MyQueue<Student>();
         MyQueue<Student> queue3 = new MyQueue<Student>();
 
+        ArrayQueue<Student> Arrqueue1 = new ArrayQueue<Student>(5);
+        ArrayQueue<Student> Arrqueue2 = new ArrayQueue<Student>(5);
+        ArrayQueue<Student> Arrqueue3 = new ArrayQueue<Student>(5);
+
         private List<Student> students = new List<Student>();
         public Form1()
         {
@@ -39,7 +43,7 @@ namespace Lab4
 
 
 
-            // Відобразимо студентів у ListBox
+            
             DisplayStudents();
         }
 
@@ -130,12 +134,76 @@ namespace Lab4
                 return _head == null;
             }
         }
+
+        public class ArrayQueue<T>
+        {
+            private T[] _items;
+            private int _head; 
+            private int _tail;
+            private int _size; 
+
+            public ArrayQueue(int capacity)
+            {
+                _items = new T[capacity];
+                _head = 0;
+                _tail = -1;
+                _size = 0;
+            }
+
+            public void Enqueue(T item)
+            {
+                if (_size == _items.Length)
+                {
+                    
+                    Array.Resize(ref _items, _items.Length * 2);
+                }
+
+                _tail = (_tail + 1) % _items.Length; 
+                _items[_tail] = item;
+                _size++;
+            }
+
+            public T Dequeue()
+            {
+                if (_size == 0)
+                {
+                    throw new InvalidOperationException("Queue is empty");
+                }
+
+                T dequeued = _items[_head];
+                _items[_head] = default(T); 
+                _head = (_head + 1) % _items.Length; 
+                _size--;
+
+                return dequeued;
+            }
+
+            public T Peek()
+            {
+                if (_size == 0)
+                {
+                    throw new InvalidOperationException("Queue is empty");
+                }
+
+                return _items[_head];
+            }
+
+            public int Count
+            {
+                get { return _size; }
+            }
+
+            public bool IsEmpty()
+            {
+                return _size == 0; 
+            }
+        }
         private void DisplayStudents()
         {
-            // Очистимо ListBox перед відображенням студентів
+            
             listBox4.Items.Clear();
 
-            // Додамо кожного студента зі списку до ListBox
+            
             foreach (var student in students)
             {
                 listBox4.Items.Add(student);
@@ -143,33 +211,74 @@ namespace Lab4
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            
-            if (!queue1.IsEmpty())
+            if (radioButton1.Checked)
             {
-                stopwatch.Restart();
-                outlistBox1.Items.Add(queue1.Dequeue());
-                listBox1.Items.RemoveAt(0);
-                stopwatch.Stop();
-                outlistBox1.Items.Add($"Execution time: {stopwatch.Elapsed}");
+                if (!queue1.IsEmpty())
+                {
+                    stopwatch.Restart();
+                    var el = queue1.Dequeue();
+                    stopwatch.Stop();
+                    outlistBox1.Items.Add(el);
+                    listBox1.Items.RemoveAt(1);
+                    listBox1.Items.RemoveAt(0);
+                    outlistBox1.Items.Add($"Execution time: {stopwatch.Elapsed}");
 
+                }
+                else if (!queue2.IsEmpty())
+                {
+                    stopwatch.Restart();
+                    var el = queue2.Dequeue();
+                    stopwatch.Stop();
+                    outlistBox2.Items.Add(el);
+                    listBox2.Items.RemoveAt(1);
+                    listBox2.Items.RemoveAt(0);
+                    outlistBox2.Items.Add($"Execution time: {stopwatch.Elapsed}");
+                }
+                else if (!queue3.IsEmpty())
+                {
+                    stopwatch.Restart();
+                    var el = queue3.Dequeue();
+                    stopwatch.Stop();
+                    outlistBox3.Items.Add(el);
+                    listBox3.Items.RemoveAt(1);
+                    listBox3.Items.RemoveAt(0);
+                    outlistBox3.Items.Add($"Execution time: {stopwatch.Elapsed}");
+                }
             }
-            else if (!queue2.IsEmpty())
+            if (radioButton2.Checked)
             {
-                stopwatch.Restart();
-                outlistBox2.Items.Add(queue2.Dequeue());
-                listBox2.Items.RemoveAt(0);
-                stopwatch.Stop();
-                outlistBox2.Items.Add($"Execution time: {stopwatch.Elapsed}");
+                if (!Arrqueue1.IsEmpty())
+                {
+                    stopwatch.Restart();
+                    var el = Arrqueue1.Dequeue();
+                    stopwatch.Stop();
+                    outlistBox1.Items.Add(el);                   
+                    listBox1.Items.RemoveAt(1);
+                    listBox1.Items.RemoveAt(0);
+                    outlistBox1.Items.Add($"Execution time: {stopwatch.Elapsed}");
+
+                }
+                else if (!Arrqueue2.IsEmpty())
+                {
+                    stopwatch.Restart();
+                    var el = Arrqueue2.Dequeue();
+                    stopwatch.Stop();
+                    outlistBox2.Items.Add(el);
+                    listBox2.Items.RemoveAt(1);
+                    listBox2.Items.RemoveAt(0);
+                    outlistBox2.Items.Add($"Execution time: {stopwatch.Elapsed}");
+                }
+                else if (!Arrqueue3.IsEmpty())
+                {
+                    stopwatch.Restart();
+                    var el = Arrqueue3.Dequeue();
+                    stopwatch.Stop();
+                    outlistBox3.Items.Add(el);
+                    listBox3.Items.RemoveAt(1);
+                    listBox3.Items.RemoveAt(0);
+                    outlistBox3.Items.Add($"Execution time: {stopwatch.Elapsed}");
+                }
             }
-            else if (!queue3.IsEmpty())
-            {
-                stopwatch.Restart();
-                outlistBox3.Items.Add(queue3.Dequeue());
-                listBox3.Items.RemoveAt(0);
-                stopwatch.Stop();
-                outlistBox3.Items.Add($"Execution time: {stopwatch.Elapsed}");
-            }
-            
 
         }
 
@@ -186,48 +295,106 @@ namespace Lab4
 
         private void button3_Click(object sender, EventArgs e)
         {
-            
 
-            try
+            if (radioButton1.Checked)
             {
-                Student firstStudent = (Student)listBox4.Items[0];
+                try
+                {
+                    Student firstStudent = (Student)listBox4.Items[0];
 
-                if (firstStudent.Group == "IC-31")
-                {
-                    firstStudent.Mark = SetMark.Value.ToString(); 
-                    listBox1.Items.Add(firstStudent);
-                    queue1.Enqueue(firstStudent);
-                }
-                else if (firstStudent.Group == "IC-32")
-                {
-                    firstStudent.Mark = SetMark.Value.ToString();
-                    listBox2.Items.Add(firstStudent);
-                    queue2.Enqueue(firstStudent);
-                }
-                else if (firstStudent.Group == "IC-33")
-                {
-                    firstStudent.Mark = SetMark.Value.ToString(); 
-                    listBox3.Items.Add(firstStudent);
-                    queue3.Enqueue(firstStudent);
-                }
+                    if (firstStudent.Group == "IC-31")
+                    {
+                        firstStudent.Mark = SetMark.Value.ToString();
+                        listBox1.Items.Add(firstStudent);
+                        stopwatch.Restart();
+                        queue1.Enqueue(firstStudent);
+                        stopwatch.Stop();
+                        listBox1.Items.Add($"Execution time: {stopwatch.Elapsed}");
+                    }
+                    else if (firstStudent.Group == "IC-32")
+                    {
+                        firstStudent.Mark = SetMark.Value.ToString();
+                        listBox2.Items.Add(firstStudent);
+                        stopwatch.Restart();
+                        queue2.Enqueue(firstStudent);
+                        stopwatch.Stop();
+                        listBox2.Items.Add($"Execution time: {stopwatch.Elapsed}");
+                    }
+                    else if (firstStudent.Group == "IC-33")
+                    {
+                        firstStudent.Mark = SetMark.Value.ToString();
+                        listBox3.Items.Add(firstStudent);
+                        stopwatch.Restart();
+                        queue3.Enqueue(firstStudent);
+                        stopwatch.Stop();
+                        listBox3.Items.Add($"Execution time: {stopwatch.Elapsed}");
+                    }
 
-                
-                if (listBox4.Items.Count > 0)
-                {
-                    listBox4.Items.RemoveAt(0);
+
+                    if (listBox4.Items.Count > 0)
+                    {
+                        listBox4.Items.RemoveAt(0);
+                    }
+                    else
+                    {
+                        throw new Exception("Неможливо видалити елемент з порожнього listBox4");
+                    }
                 }
-                else
+                catch
                 {
-                    throw new Exception("Неможливо видалити елемент з порожнього listBox4");
+                    MessageBox.Show($"Помилка: listBox порожній", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            catch 
+
+            if (radioButton2.Checked)
             {
-                MessageBox.Show($"Помилка: listBox порожній", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                try
+                {
+                    Student firstStudent = (Student)listBox4.Items[0];
+
+                    if (firstStudent.Group == "IC-31")
+                    {
+                        firstStudent.Mark = SetMark.Value.ToString();
+                        listBox1.Items.Add(firstStudent);
+                        stopwatch.Restart();
+                        Arrqueue1.Enqueue(firstStudent);
+                        stopwatch.Stop();
+                        listBox1.Items.Add($"Execution time: {stopwatch.Elapsed}");
+                    }
+                    else if (firstStudent.Group == "IC-32")
+                    {
+                        firstStudent.Mark = SetMark.Value.ToString();
+                        listBox2.Items.Add(firstStudent);
+                        stopwatch.Restart();
+                        Arrqueue2.Enqueue(firstStudent);
+                        stopwatch.Stop();
+                        listBox2.Items.Add($"Execution time: {stopwatch.Elapsed}");
+                    }
+                    else if (firstStudent.Group == "IC-33")
+                    {
+                        firstStudent.Mark = SetMark.Value.ToString();
+                        listBox3.Items.Add(firstStudent);
+                        stopwatch.Restart();
+                        Arrqueue3.Enqueue(firstStudent);
+                        stopwatch.Stop();
+                        listBox3.Items.Add($"Execution time: {stopwatch.Elapsed}");
+                    }
+
+
+                    if (listBox4.Items.Count > 0)
+                    {
+                        listBox4.Items.RemoveAt(0);
+                    }
+                    else
+                    {
+                        throw new Exception("Неможливо видалити елемент з порожнього listBox4");
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show($"Помилка: listBox порожній", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-
-
-
         }
 
         private void button2_Click(object sender, EventArgs e)

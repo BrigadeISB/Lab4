@@ -46,6 +46,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.SetMark = new System.Windows.Forms.NumericUpDown();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.SetMark)).BeginInit();
             this.SuspendLayout();
             // 
@@ -200,9 +202,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(15, 375);
+            this.button3.Location = new System.Drawing.Point(12, 407);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(210, 113);
+            this.button3.Size = new System.Drawing.Size(210, 85);
             this.button3.TabIndex = 16;
             this.button3.Text = "Оцінити студента";
             this.button3.UseVisualStyleBackColor = true;
@@ -220,11 +222,35 @@
             this.SetMark.Size = new System.Drawing.Size(120, 22);
             this.SetMark.TabIndex = 17;
             // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(15, 355);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(179, 20);
+            this.radioButton1.TabIndex = 18;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Черга за вказівниками";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(15, 381);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(146, 20);
+            this.radioButton2.TabIndex = 19;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "Черга за масивом";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(940, 517);
+            this.Controls.Add(this.radioButton2);
+            this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.SetMark);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.label7);
@@ -271,6 +297,8 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.NumericUpDown SetMark;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton radioButton2;
     }
 }
 
